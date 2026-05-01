@@ -356,7 +356,7 @@
   let profile = null;
   let allProjects = [];
 
-  // ─── INIT ─────────────────────────────────────────────────────────────
+  // ─── INIT ─────────────────────────────────────────────────────────────────────
   async function init() {
     const { data: { session } } = await sb.auth.getSession();
     if (!session) return location.href = '/auth.html';
