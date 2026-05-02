@@ -169,6 +169,14 @@
       .nav-links { display: none; }
       .stats { gap: 24px; }
     }
+    .pricing-toggle{display:flex;justify-content:center;gap:4px;margin-bottom:36px;background:var(--card);border:1px solid var(--border);border-radius:50px;padding:5px;width:fit-content;margin-left:auto;margin-right:auto;}
+    .toggle-btn{background:transparent;border:none;color:var(--muted);padding:8px 22px;border-radius:50px;font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+    .toggle-btn.active{background:var(--purple);color:#fff;}
+    .save-tag{background:rgba(236,72,153,0.2);color:var(--pink);padding:2px 7px;border-radius:50px;font-size:0.72rem;margin-left:6px;vertical-align:middle;}
+    .guarantee-note{color:#a78bfa;font-size:0.82rem;margin-top:10px;text-align:center;font-weight:500;}
+    .example-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+    .example-tabs .tab{cursor:pointer;background:var(--card);border:1px solid var(--border);color:var(--muted);padding:7px 18px;border-radius:8px;font-size:0.85rem;transition:all 0.2s;user-select:none;}
+    .example-tabs .tab.active{background:var(--purple);border-color:var(--purple);color:#fff;}
   </style>
 </head>
 <body>
@@ -238,39 +246,23 @@
 <!-- GENERATOR -->
 <div class="generator-wrap" id="generator">
   <div class="generator-inner">
-    <div class="section-label" style="text-align:center;">Live Demo</div>
-    <h2 class="section-title">Try It Now — Free</h2>
-    <p class="section-sub">Free plan: 1 script variation. Upgrade for all 3.</p>
+    <div class="section-label" style="text-align:center;">Example Output</div>
+    <h2 class="section-title">See What ShortsForgeAI Creates</h2>
+    <p class="section-sub">Real AI-generated scripts — sign up free and create yours in under 2 minutes.</p>
     <div class="gen-box">
-      <label>Your Topic</label>
-      <input type="text" id="topicInput" placeholder="e.g. Secrets of the pyramids, Elon Musk habits, Hidden places..."/>
-      <label>Script Style</label>
-      <select id="styleSelect">
-        <option value="mystery">🔮 Mystery & Shocking</option>
-        <option value="motivation">💪 Motivational</option>
-        <option value="educational">📚 Educational Facts</option>
-        <option value="billionaire">💰 Billionaire Mindset</option>
-      </select>
-      <button class="gen-btn" onclick="generateScript()">⚡ Generate Scripts</button>
-
-      <div id="outputArea" style="margin-top:28px; display:none;">
-        <div class="tabs">
-          <div class="tab active" id="tab1" onclick="showTab(1)">Variation 1</div>
-          <div class="tab locked" id="tab2" onclick="showUpgrade()">Variation 2 🔒</div>
-          <div class="tab locked" id="tab3" onclick="showUpgrade()">Variation 3 🔒</div>
-        </div>
-        <div class="output-box" id="scriptOutput"></div>
-        <div class="upgrade-gate" id="upgradeGate">
-          <h4>🔒 Unlock All 3 Variations</h4>
-          <p>Get unlimited scripts with all 3 variations for just $15/month. No limits, no restrictions.</p>
-          <a href="https://buy.stripe.com/bJecN56kJ37h4M3bB4gjC01" target="_blank" class="btn-primary" style="display:inline-block; padding:12px 28px; font-size:0.9rem;">Get Pro Plan — $15/mo →</a>
-        </div>
+      <div class="example-tabs">
+        <div class="tab active" onclick="showEx(0,this)">🔮 Mystery</div>
+        <div class="tab" onclick="showEx(1,this)">💪 Motivation</div>
+        <div class="tab" onclick="showEx(2,this)">💰 Billionaire Mindset</div>
+      </div>
+      <div class="output-box" id="exampleOutput" style="white-space:pre-wrap;min-height:200px;font-size:0.9rem;line-height:1.7;"></div>
+      <div style="text-align:center;margin-top:28px;">
+        <a href="/auth.html" class="btn-primary" style="display:inline-block;padding:14px 36px;font-size:1.05rem;">Sign Up Free to Generate Your Own →</a>
+        <p style="color:var(--muted);font-size:0.82rem;margin-top:10px;">No credit card required · First script ready in under 2 minutes</p>
       </div>
     </div>
   </div>
 </div>
-
-<!-- PRICING -->
 <section id="pricing">
   <div class="section-label">Pricing</div>
   <h2 class="section-title">Simple, Transparent Pricing</h2>
@@ -278,57 +270,128 @@
 
   
 
-  <div class="pricing-grid">
-    <!-- FREE -->
-    <div class="plan">
-      <div class="plan-name">Free</div>
-      <div class="plan-price">$0<span>/mo</span></div>
-      <div class="plan-desc">Try it — no card needed</div>
-      <ul class="plan-features">
-        <li><span class="check">✓</span> 1 script variation per topic</li>
-        <li><span class="check">✓</span> All niches & styles</li>
-        <li><span class="check">✓</span> Instant generation</li>
-        <li><span class="cross">✗</span> 3 variations per topic</li>
-        <li><span class="cross">✗</span> Priority support</li>
-        <li><span class="cross">✗</span> Watermark-free export note</li>
-      </ul>
-      <a href="#generator" class="btn-plan btn-plan-free">Try Free</a>
-    </div>
-    <!-- PRO -->
-    <div class="plan featured">
-      <div class="plan-badge">🔥 Most Popular</div>
-      <div class="plan-name">Pro</div>
-      <div class="plan-price">$15<span>/mo</span></div>
-      <div class="plan-desc">For creators posting 5+ Shorts/day</div>
-      <ul class="plan-features">
-        <li><span class="check">✓</span> Everything in Free</li>
-        <li><span class="check">✓</span> InVideo prompt pack included</li>
-        <li><span class="check">✓</span> Viral title generator</li>
-        <li><span class="check">✓</span> Hashtag optimizer</li>
-        <li><span class="check">✓</span> Priority support</li>
-        <li><span class="cross">✗</span> Custom brand voice</li>
-      </ul>
-      <a href="https://buy.stripe.com/bJecN56kJ37h4M3bB4gjC01" target="_blank" rel="noopener" class="btn-plan btn-plan-paid" style="background:linear-gradient(135deg,#5b21b6,#7c3aed);">Get Pro →</a>
-    </div>
-    <!-- MAX -->
-    <div class="plan">
-      <div class="plan-badge" style="background:linear-gradient(135deg,#0f0f0f,#1a1a2e);border:1px solid var(--purple);color:var(--purple-light);">👑 Max</div>
-      <div class="plan-name">Max</div>
-      <div class="plan-price">$29<span>/mo</span></div>
-      <div class="plan-desc">Full system for serious channel growth</div>
-      <ul class="plan-features">
-        <li><span class="check">✓</span> Everything in Pro</li>
-        <li><span class="check">✓</span> Custom brand voice</li>
-        <li><span class="check">✓</span> Batch generate 10 scripts</li>
-        <li><span class="check">✓</span> Analytics-driven suggestions</li>
-        <li><span class="check">✓</span> 1-on-1 growth call/month</li>
-        <li><span class="check">✓</span> "Made with ShortsForgeAI" watermark control</li>
-      </ul>
-      <a href="https://buy.stripe.com/8x200jfVj7nxemD0WqgjC02" target="_blank" rel="noopener" class="btn-plan btn-plan-paid">Get Max →</a>
-    </div>
+  <!-- PRICING TOGGLE -->
+<div class="pricing-toggle">
+  <button class="toggle-btn active" onclick="switchPlan('monthly',this)">Monthly</button>
+  <button class="toggle-btn" onclick="switchPlan('annual',this)">Annual <span class="save-tag">Save 46%</span></button>
+  <button class="toggle-btn" onclick="switchPlan('lifetime',this)">Lifetime</button>
+</div>
+<!-- MONTHLY -->
+<div id="plans-monthly"><div class="pricing-grid">
+  <div class="plan">
+    <div class="plan-name">Free</div>
+    <div class="plan-price">$0<span>/mo</span></div>
+    <div class="plan-desc">Try it — no card needed</div>
+    <ul class="plan-features">
+      <li><span class="check">✓</span> 1 script variation per topic</li>
+      <li><span class="check">✓</span> All niches &amp; styles</li>
+      <li><span class="check">✓</span> Instant generation</li>
+      <li><span class="cross">✗</span> 3 variations per topic</li>
+      <li><span class="cross">✗</span> Priority support</li>
+      <li><span class="cross">✗</span> Custom brand voice</li>
+    </ul>
+    <a href="#generator" class="btn-plan btn-plan-free">Try Free</a>
   </div>
-
-  <!-- CREDIT PACKS -->
+  <div class="plan featured">
+    <div class="plan-badge">🔥 Most Popular</div>
+    <div class="plan-name">Pro</div>
+    <div class="plan-price">$15<span>/mo</span></div>
+    <div class="plan-desc">For creators posting 5+ Shorts/day</div>
+    <ul class="plan-features">
+      <li><span class="check">✓</span> Everything in Free</li>
+      <li><span class="check">✓</span> Full voiceover &amp; export pack</li>
+      <li><span class="check">✓</span> Viral title generator</li>
+      <li><span class="check">✓</span> Hashtag optimizer</li>
+      <li><span class="check">✓</span> Priority support</li>
+      <li><span class="cross">✗</span> Custom brand voice</li>
+    </ul>
+    <a href="https://buy.stripe.com/bJecN56kJ37h4M3bB4gjC01" target="_blank" rel="noopener" class="btn-plan btn-plan-paid" style="background:linear-gradient(135deg,#5b21b6,#7c3aed);">Get Pro →</a>
+    <p class="guarantee-note">✓ 30-day money-back guarantee</p>
+  </div>
+  <div class="plan">
+    <div class="plan-badge" style="background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid #4338ca;color:#c7d2fe;">🚀 Full System</div>
+    <div class="plan-name">Max</div>
+    <div class="plan-price">$29<span>/mo</span></div>
+    <div class="plan-desc">Full system for serious channel growth</div>
+    <ul class="plan-features">
+      <li><span class="check">✓</span> Everything in Pro</li>
+      <li><span class="check">✓</span> Custom brand voice</li>
+      <li><span class="check">✓</span> Batch generate 10 scripts</li>
+      <li><span class="check">✓</span> Analytics-driven suggestions</li>
+      <li><span class="check">✓</span> Watermark control</li>
+    </ul>
+    <a href="https://buy.stripe.com/8x200jfVj7nxemD0WqgjC02" target="_blank" rel="noopener" class="btn-plan btn-plan-paid">Get Max →</a>
+    <p class="guarantee-note">✓ 30-day money-back guarantee</p>
+  </div>
+</div></div>
+<!-- ANNUAL -->
+<div id="plans-annual" style="display:none;"><div class="pricing-grid">
+  <div class="plan">
+    <div class="plan-name">Free</div>
+    <div class="plan-price">$0<span>/mo</span></div>
+    <div class="plan-desc">Always free — no card needed</div>
+    <ul class="plan-features">
+      <li><span class="check">✓</span> 1 script variation per topic</li>
+      <li><span class="check">✓</span> All niches &amp; styles</li>
+      <li><span class="check">✓</span> Instant generation</li>
+      <li><span class="cross">✗</span> 3 variations per topic</li>
+      <li><span class="cross">✗</span> Priority support</li>
+      <li><span class="cross">✗</span> Custom brand voice</li>
+    </ul>
+    <a href="#generator" class="btn-plan btn-plan-free">Try Free</a>
+  </div>
+  <div class="plan featured">
+    <div class="plan-badge">⭐ Most Popular</div>
+    <div class="plan-name">Pro Annual</div>
+    <div class="plan-price">$97<span>/year</span></div>
+    <div class="plan-desc">Just $8/mo — save 46% vs monthly</div>
+    <ul class="plan-features">
+      <li><span class="check">✓</span> Everything in Free</li>
+      <li><span class="check">✓</span> Full voiceover &amp; export pack</li>
+      <li><span class="check">✓</span> Viral title generator</li>
+      <li><span class="check">✓</span> Hashtag optimizer</li>
+      <li><span class="check">✓</span> Priority support</li>
+      <li><span class="cross">✗</span> Custom brand voice</li>
+    </ul>
+    <a href="https://buy.stripe.com/4gM14ngZncHRdiz0WqgjC06" target="_blank" rel="noopener" class="btn-plan btn-plan-paid" style="background:linear-gradient(135deg,#5b21b6,#7c3aed);">Get Pro Annual →</a>
+    <p class="guarantee-note">✓ 30-day money-back guarantee</p>
+  </div>
+  <div class="plan">
+    <div class="plan-badge" style="background:linear-gradient(135deg,#1e1b4b,#312e81);border:1px solid #4338ca;color:#c7d2fe;">🚀 Full System</div>
+    <div class="plan-name">Max Annual</div>
+    <div class="plan-price">$197<span>/year</span></div>
+    <div class="plan-desc">Just $16/mo — serious growth, serious savings</div>
+    <ul class="plan-features">
+      <li><span class="check">✓</span> Everything in Pro</li>
+      <li><span class="check">✓</span> Custom brand voice</li>
+      <li><span class="check">✓</span> Batch generate 10 scripts</li>
+      <li><span class="check">✓</span> Analytics-driven suggestions</li>
+      <li><span class="check">✓</span> Watermark control</li>
+    </ul>
+    <a href="https://buy.stripe.com/14AdR96kJazJbar9sWgjC07" target="_blank" rel="noopener" class="btn-plan btn-plan-paid">Get Max Annual →</a>
+    <p class="guarantee-note">✓ 30-day money-back guarantee</p>
+  </div>
+</div></div>
+<!-- LIFETIME -->
+<div id="plans-lifetime" style="display:none;"><div class="pricing-grid" style="justify-content:center;">
+  <div class="plan featured" style="max-width:420px;width:100%;">
+    <div class="plan-badge" style="background:linear-gradient(135deg,#d97706,#f59e0b);color:#000;">✨ Best Value — Pay Once</div>
+    <div class="plan-name">Lifetime Access</div>
+    <div class="plan-price">$297<span> one-time</span></div>
+    <div class="plan-desc">Pay once, use forever. All Pro features — no monthly fees, ever.</div>
+    <ul class="plan-features">
+      <li><span class="check">✓</span> Everything in Pro, forever</li>
+      <li><span class="check">✓</span> Full voiceover &amp; export pack</li>
+      <li><span class="check">✓</span> Viral title generator</li>
+      <li><span class="check">✓</span> Hashtag optimizer</li>
+      <li><span class="check">✓</span> Priority support for life</li>
+      <li><span class="check">✓</span> All future updates included</li>
+    </ul>
+    <a href="https://buy.stripe.com/14AeVdaAZ8rB4M348CgjC08" target="_blank" rel="noopener" class="btn-plan btn-plan-paid" style="background:linear-gradient(135deg,#d97706,#f59e0b);color:#000;">Get Lifetime Access →</a>
+    <p class="guarantee-note">✓ 30-day money-back guarantee</p>
+  </div>
+</div></div>
+<!-- CREDIT PACKS -->
   <div style="text-align:center; margin-top:60px; margin-bottom:24px;">
     <div class="section-label">One-Time Credit Packs</div>
     <h3 style="font-size:1.5rem; font-weight:800; margin-bottom:8px;">Need More? Buy a Pack</h3>
@@ -394,7 +457,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">Do I need any video editing skills? <span class="faq-icon">+</span></div>
-      <div class="faq-a">No! ShortsForgeAI only handles the script. You can pair it with tools like InVideo AI to create the full video — no editing skills required.</div>
+      <div class="faq-a">No! ShortsForgeAI only handles the script. You can pair it with any video creation tool to produce and post your Shorts — no editing skills required.</div>
     </div>
   </div>
 </section>
@@ -484,6 +547,27 @@ function toggleFaq(el) {
   const item = el.parentElement;
   item.classList.toggle('open');
 }
+
+function switchPlan(type, btn) {
+  ['monthly','annual','lifetime'].forEach(function(t){
+    var el = document.getElementById('plans-'+t);
+    if(el) el.style.display = (t===type) ? '' : 'none';
+  });
+  document.querySelectorAll('.toggle-btn').forEach(function(b){
+    b.classList.toggle('active', b===btn);
+  });
+}
+function showEx(idx, el) {
+  var keys = ['mystery','motivation','billionaire'];
+  var out = document.getElementById('exampleOutput');
+  if(out && scripts[keys[idx]]) out.textContent = scripts[keys[idx]][0];
+  document.querySelectorAll('.example-tabs .tab').forEach(function(t){ t.classList.remove('active'); });
+  if(el) el.classList.add('active');
+}
+(function(){
+  var out = document.getElementById('exampleOutput');
+  if(out) showEx(0, document.querySelector('.example-tabs .tab'));
+})();
 </script>
 </body>
 </html>
