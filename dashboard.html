@@ -848,7 +848,7 @@ function renderPlan() {
   ['free','pro','max'].forEach(p => {
     document.getElementById('planCard' + p.charAt(0).toUpperCase() + p.slice(1)).classList.toggle('current', plan === p);
   });
-  if (plan !== 'free') document.getElementById('proCTA').textContent = plan === 'pro' ? '✅ Current Plan' : 'Get Pro →+;
+  if (plan !== 'free') document.getElementById('proCTA').textContent = plan === 'pro' ? '✅ Current Plan' : 'Get Pro →';
   if (plan === 'max')  document.getElementById('maxCTA').textContent = '✅ Current Plan';
 }
 
