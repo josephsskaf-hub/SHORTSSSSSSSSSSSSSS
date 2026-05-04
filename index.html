@@ -20,7 +20,16 @@
       --border: #2d2d5b;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: var(--dark); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; }
+    body {
+      background: var(--dark);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.6;
+      background-image:
+        linear-gradient(rgba(124,58,237,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,58,237,0.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
 
     /* NAV */
     nav {
@@ -35,6 +44,8 @@
     .nav-links a:hover { color: var(--text); }
     .btn-nav { background: linear-gradient(135deg, var(--purple), var(--pink)); color: #fff !important; padding: 8px 20px; border-radius: 8px; font-weight: 700; font-size: 0.85rem !important; transition: opacity .2s !important; }
     .btn-nav:hover { opacity: 0.85; }
+    .btn-nav-outline { background: transparent; color: var(--text) !important; padding: 8px 18px; border-radius: 8px; font-weight: 600; font-size: 0.85rem !important; border: 1px solid var(--border); transition: border-color .2s, color .2s !important; }
+    .btn-nav-outline:hover { border-color: var(--purple-light) !important; color: var(--purple-light) !important; }
 
     /* HERO */
     .hero {
@@ -165,6 +176,23 @@
     footer p { color: var(--muted); font-size: 0.82rem; }
     footer a { color: var(--purple-light); text-decoration: none; }
 
+    /* SIGNUP CTA STRIP */
+    .signup-strip {
+      background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(236,72,153,0.08));
+      border: 1px solid rgba(124,58,237,0.25);
+      border-radius: 20px;
+      margin: 0 auto;
+      max-width: 820px;
+      padding: 40px 36px;
+      text-align: center;
+      margin-top: 52px;
+    }
+    .signup-strip h3 { font-size: 1.45rem; font-weight: 800; margin-bottom: 10px; }
+    .signup-strip p { color: var(--muted); font-size: 0.93rem; margin-bottom: 28px; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .signup-strip-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .signup-trust { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 18px; }
+    .signup-trust span { font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+
     @media (max-width: 640px) {
       .nav-links { display: none; }
       .stats { gap: 24px; }
@@ -230,7 +258,7 @@
 <body>
 
 <!-- URGENCY BANNER -->
-<div class="urgency-bar">🔥 Limited Offer — Pro Plan just $9/mo · Max Plan $19/mo <span>· Lock in early pricing before it increases ⏰</span></div>
+<div class="urgency-bar">🔥 Limited Offer — Pro Plan just $9/mo · Max Plan $19/mo <span>· Lock in aarly pricing before it increases ⏰</span></div>
 
 <!-- NAV -->
 <nav>
@@ -240,7 +268,8 @@
     <a href="#generator">Try Free</a>
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
-    <a href="#pricing" class="btn-nav">🔥 From $9/mo →</a>
+    <a href="/auth.html" id="navLoginLink" class="btn-nav-outline">Sign In</a>
+    <a href="/auth.html?mode=signup" id="navSignupBtn" class="btn-nav">Create Account →</a>
   </div>
 </nav>
 
@@ -275,6 +304,21 @@
     <div class="step"><div class="step-num">1</div><h3>Enter Your Topic</h3><p>Type any topic — mysteries, finance, motivation, history. Anything works.</p></div>
     <div class="step"><div class="step-num">2</div><h3>Pick Your Style</h3><p>Choose from educational, shocking, or motivational tones to match your brand.</p></div>
     <div class="step"><div class="step-num">3</div><h3>Get 3 Scripts</h3><p>Receive 3 unique variations instantly. Pick the best one and hit record.</p></div>
+  </div>
+
+  <!-- SIGNUP CTA STRIP -->
+  <div class="signup-strip">
+    <h3>Ready to start growing? It's free.</h3>
+    <p>Join 3,200+ creators already posting with AI-generated scripts. No credit card required to try.</p>
+    <div class="signup-strip-btns">
+      <a href="/auth.html?mode=signup" class="btn-primary" style="font-size:0.95rem; padding:13px 30px;">🚀 Create Free Account</a>
+      <a href="#generator" class="btn-secondary" style="font-size:0.95rem; padding:13px 30px;">Try Without Signing Up</a>
+    </div>
+    <div class="signup-trust">
+      <span>✅ Free forever plan</span>
+      <span>✅ No credit card needed</span>
+      <span>✅ Up & running in 30 seconds</span>
+    </div>
   </div>
 </section>
 
@@ -405,20 +449,34 @@
     <h3 style="font-size:1.5rem; font-weight:800; margin-bottom:8px;">Need More? Buy a Pack</h3>
     <p style="color:var(--muted); font-size:0.9rem; margin-bottom:32px;">No subscription required. Use credits anytime, they never expire.</p>
   </div>
-  <div class="packs-grid">
+  <div class="packs-grid" style="grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); max-width:860px;">
     <div class="pack">
+      <div class="pack-vids">10</div>
+      <div class="pack-label">Script Credits</div>
+      <div class="pack-price">$3</div>
+      <div class="pack-per">$0.30 per script</div>
+      <a href="https://buy.stripe.com/3cIfZh6kJ23dguLax0gjC03" target="_blank" rel="noopener" class="btn-plan btn-plan-free" style="font-size:0.82rem;">Buy 10 Credits →</a>
+    </div>
+    <div class="pack">
+      <div class="pack-vids">20</div>
+      <div class="pack-label">Script Credits</div>
+      <div class="pack-price">$5</div>
+      <div class="pack-per">$0.25 per script</div>
+      <a href="https://buy.stripe.com/3cIfZh6kJ23dguLax0gjC03" target="_blank" rel="noopener" class="btn-plan btn-plan-free" style="font-size:0.82rem;">Buy 20 Credits →</a>
+    </div>
+    <div class="pack" style="border-color:var(--purple);">
       <div class="pack-vids">50</div>
       <div class="pack-label">Script Credits</div>
-      <div class="pack-price">$10</div>
-      <div class="pack-per">$0.20 per script</div>
-      <a href="https://buy.stripe.com/3cIfZh6kJ23dguLax0gjC03" target="_blank" rel="noopener" class="btn-plan btn-plan-free" style="font-size:0.88rem;">Buy 50 Credits →</a>
+      <div class="pack-price">$12</div>
+      <div class="pack-per">$0.24 per script — popular</div>
+      <a href="https://buy.stripe.com/3cIfZh6kJ23dguLax0gjC03" target="_blank" rel="noopener" class="btn-plan btn-plan-paid" style="font-size:0.82rem;">Buy 50 Credits →</a>
     </div>
     <div class="pack">
       <div class="pack-vids">100</div>
       <div class="pack-label">Script Credits</div>
       <div class="pack-price">$20</div>
       <div class="pack-per">$0.20 per script — best value</div>
-      <a href="https://buy.stripe.com/14A6oHeRf4blemDdJcgjC04" target="_blank" rel="noopener" class="btn-plan btn-plan-paid" style="font-size:0.88rem;">Buy 100 Credits →</a>
+      <a href="https://buy.stripe.com/14A6oHeRf4blemDdJcgjC04" target="_blank" rel="noopener" class="btn-plan btn-plan-paid" style="font-size:0.82rem;">Buy 100 Credits →</a>
     </div>
   </div>
 </section>
@@ -483,7 +541,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">Can I cancel anytime? <span class="faq-icon">+</span></div>
-      <div class="faq-a">Yes, absolutely. You can cancel anytime directly through Stripe — no questions asked, no hassle. Your access continues until the end of your billing period.</div>
+      <div class="faq-a">Yes, absolutely. You can cancel anytime directly through Stripe — coments asked, no hassle. Your access continues until the end of your billing period.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="toggleFaq(this)">Do I need any video editing skills? <span class="faq-icon">+</span></div>
@@ -492,7 +550,8 @@
   </div>
 </section>
 
-<!-- FINAL CTA -->
+<!-- FINAL CTA
+ -->
 <div class="final-cta">
   <h2>Get Viral YouTube Shorts<br/>in Seconds</h2>
   <p>Join 3,200+ creators already growing. Start free today — lock in early pricing before it goes up.</p>
@@ -507,9 +566,8 @@
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 ShortsForgeAI · <a href="mailto:josephsskaf@gmail.com">Contact</a> · Built for creators who want to grow 🚀</p>
+  <p>© 2026 ShortsForgeAI · <a href="mailto:josephsskaf@gmail.com">See our data</a> ¿ Built for creators who want to grow 🚀</p>
 </footer>
-
 <script>
 const scripts = {
   mystery: [
@@ -692,71 +750,4 @@ function toggleFaq(el) {
       document.querySelectorAll('.annual-note').forEach(el => el.style.display = isAnnual ? 'block' : 'none');
     }
 
-    // ─── AUTH INIT ──────────────────────────────────────────────────────────────
-    let _userPlan = 'free';
-    _sb.auth.getSession().then(({ data }) => {
-      const session = data.session;
-      if (session) {
-        const loginLink = document.getElementById('navLoginLink');
-        if (loginLink) { loginLink.textContent = 'My Area →'; loginLink.href = '/dashboard.html'; loginLink.style.color = 'var(--purple-light)'; }
-        const banner = document.getElementById('userBanner');
-        if (banner) { document.getElementById('bannerEmail').textContent = session.user.email; banner.style.display = 'block'; }
-        // Load plan from Supabase
-        _sb.from('profiles').select('plan,scripts_generated').eq('id', session.user.id).single().then(({ data: prof }) => {
-          if (prof) { _userPlan = prof.plan || 'free'; updateUsageUI(true, _userPlan); }
-        });
-      } else {
-        updateUsageUI(false, 'free');
-        // Gate payment buttons for unauthenticated users
-        document.querySelectorAll('a[href*="buy.stripe.com"]').forEach(btn => {
-          btn.addEventListener('click', function(e) {
-            const stored = localStorage.getItem('sfai_session');
-            if (!stored) { e.preventDefault(); location.href = '/auth.html?next=pricing'; }
-          });
-        });
-      }
-    });
-
-    // ─── INTERCEPT GENERATE BUTTON ──────────────────────────────────────────────
-    // Hook into the existing generate function
-    const _origGenerate = window.generateScript;
-    window.generateScript = async function(...args) {
-      if (checkPaywall(_userPlan)) {
-        document.getElementById('paywallModal').classList.add('open');
-        return;
-      }
-      const result = await _origGenerate?.apply(this, args);
-      const count = incrementUsage();
-      updateUsageUI(true, _userPlan);
-      // Show upsell after 1st successful generation (for free users)
-      if (_userPlan === 'free' && count >= 1) {
-        setTimeout(() => { document.getElementById('upsellModal').classList.add('open'); }, 4000);
-      }
-      return result;
-    };
-
-    // If page uses a button click pattern instead of generateScript function:
-    document.addEventListener('DOMContentLoaded', () => {
-      const genBtn = document.querySelector('button[onclick*="generat"], .btn-generate, #generateBtn');
-      if (genBtn && !genBtn._patched) {
-        genBtn._patched = true;
-        const orig = genBtn.onclick;
-        genBtn.onclick = function(e) {
-          if (checkPaywall(_userPlan)) { e.preventDefault(); e.stopPropagation(); document.getElementById('paywallModal').classList.add('open'); return false; }
-          if (orig) orig.call(this, e);
-          const count = incrementUsage();
-          updateUsageUI(true, _userPlan);
-          if (_userPlan === 'free' && count >= 1) {
-            setTimeout(() => { document.getElementById('upsellModal').classList.add('open'); }, 4000);
-          }
-        };
-      }
-    });
-
-    // Close modals on overlay click
-    document.querySelectorAll('.modal-overlay').forEach(m => {
-      m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); });
-    });
-  </script>
-</body>
-</html>
+    // ─── AUTH INIT ───────────────────────────────────────────────────────────�
