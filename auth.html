@@ -233,7 +233,11 @@
     const { error } = await sb.auth.signUp({ email, password, options: { data: { name } } });
     setLoading('signupBtn', false, 'Create Account');
     if (error) return setMsg('signupMsg', error.message, 'error');
-    setMsg('signupMsg', '✅ Account created! Check your email to confirm, then sign in.', 'success');
+    // Auto sign-in after signup → redirect to dashboard
+    const { error: signInError } = await sb.auth.signInWithPassword({ email, password });
+    setLoading('signupBtn', false, 'Create Account');
+    if (signInError) return setMsg('signupMsg', signInError.message, 'error');
+    location.href = '/dashboard.html';
   }
 
   // ─── FORGOT PASSWORD ────────────────────────────────────────────────────────
